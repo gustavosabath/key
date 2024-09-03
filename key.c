@@ -7,31 +7,19 @@ void execute(char* path, int opCode) {
     if (process == NULL) {
         printf("Keyboard Error: Unable to get bash file!\n");
     } else {
-        while (fgets(done, 5, process) != NULL) {
-            switch (strcmp(done, "done")) {
-                case 0:
-                    switch (opCode) {
-                        case 0:
-                            printf("Keyboard: Enabled successfully.\n");
-                            break;
+        switch (opCode) {
+            case 0:
+                printf("Keyboard: Enabled successfully.\n");
+                break;
 
-                        case 1:
-                            printf("Keyboard: Disabled successfully.\n");
-                            break;
-                        
-                        default:
-                            printf("Keyboard Warning: Modified Software!\n");
-                            break;
-                    }
-                    break;
-                
-                default:
-                    printf("Keyboard Error: Error in bash file! Code 0.\n");
-                    break;
-            }
-            return;
+            case 1:
+                printf("Keyboard: Disabled successfully.\n");
+                break;
+            
+            default:
+                printf("Keyboard Warning: Modified Software!\n");
+                break;
         }
-        printf("Keyboard Error: Error in bash file! Code 1.\n");
         return;
     }
 }
@@ -54,5 +42,6 @@ int main(int argc, char* argv[]) {
             }
             break;
     }
+    pclose(process);
     return 0;
 }
